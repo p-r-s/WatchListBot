@@ -343,7 +343,7 @@ async function deleteMovie(delStr, senderScreenName, client, message, replyId) {
 	let movie = "";
 	
 	const regexpYear = /\([0-9]+\)/;
-	const regexpDir = /dir | dir. | dir. |dir.|dir. | - /i;
+	const regexpDir = /dir | dir. | dir. |dir.|dir. | \- /i;
 	
 	if (delStr.match(regexpYear)) {
 		 year = delStr.match(regexpYear)[0].trim();
