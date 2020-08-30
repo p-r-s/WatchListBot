@@ -3,16 +3,24 @@ var Twit = require ('twit');
 var config = require ('./config');
 const { Autohook } = require('twitter-autohook');
 const {MongoClient} = require('mongodb');
-var T = new Twit(config);
+var T = new Twit({
+	consumer_key: process.env.consumer_key.toString(),
+	consumer_secret: process.env.consumer_secret.toString(),
+	access_token: process.env.access_token.toString(),
+	access_token_secret: process.env.access_token_secret.toString(),
+	tweet_mode: 'extended',
+	timeout_ms:           60*1000, 
+	strictSSL:            true,  
+});
 const util = require('util');
 const request = require ('request');
 
 const userId = '1299017827496714243';
 const oAuthConfig = {
-  token: config.access_token,
-  token_secret: config.access_token_secret,
-  consumer_key: config.consumer_key,
-  consumer_secret: config.consumer_secret,
+  token: process.env.access_token.toString(),
+  token_secret: process.env.access_token_secret.toString(),
+  consumer_key: process.env.consumer_key.toString(),
+  consumer_secret: process.env.consumer_secret.toString(),
 };
 
 const post = util.promisify(request.post);
