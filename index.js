@@ -37,9 +37,7 @@ async function connectDb() {
 } catch (e) {
     console.error(e);
 }
-finally {
-	client.close();
-}
+
 }
 
 
