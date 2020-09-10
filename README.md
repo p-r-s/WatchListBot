@@ -1,5 +1,5 @@
 # WatchListBot
-A Twitter Bot that makes use of the Twit and Autohook packages to maintain a MongoDB watchlist for Twitter users that DM/@mention it
+A Twitter Bot that makes use of the Twit and Autohook packages to maintain a MongoDB watchlist for Twitter users that DM/@mention it.
 Visit: https://twitter.com/WatchListBot to use!
 
 # Usage Instructions
