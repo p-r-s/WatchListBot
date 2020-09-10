@@ -3,7 +3,7 @@ A Twitter Bot that makes use of the Twit and Autohook packages to maintain a Mon
 Visit: https://twitter.com/WatchListBot to use!
 
 # Usage Instructions
-Bot can repond to DMs and @ s.
+Bot can repond to DMs and @ s. <br>
 Format: movie (year) dir. dir; year and dir are optional.
 To view list: send "watchlist" or "list".
 To add movies: send "movie (year) dir. dir" or "add movie (year) dir. dir"; year and dir are optional.
