@@ -56,29 +56,13 @@ async function setWebhook(client) {
   await webhook.removeWebhooks();
   
   // Listens to incoming activity
-  webhook.on('event',  async event => {
-	  /*if (event.user_has_blocked == false) {
-		 // T.post('statuses/update', { status: '@'+ event.tweet_create_events[0].user. screen_name + ' Hi! My name is twitter bot :)'  }, function(err, data, response) {
-		//console.log(data)
-	  //})
-	  //console.log(event.tweet_create_events[0].in_reply_to_status_id_str);
-		T.get('statuses/show', {id:event.tweet_create_events[0].in_reply_to_status_id_str}, function(err, data, response) {
-		
-		console.log('Pic\n', data.extended_entities.media[0]);
-		console.log('Pic\n', data.extended_entities.media[1]);
-		console.log('Pic\n',data.extended_entities.media[2]);
-		console.log('Pic\n',data.extended_entities.media[3]);
-		});	
-	 }	*/
-		
+  webhook.on('event',  async event => {	
 		if (event.direct_message_events) {
 			await DM(event, client);
 		}
 		else if (event.user_has_blocked == false) {
-			
 			await mention(event, client);
 		}
-		
   });
   
   // Starts a server and adds a new webhook
@@ -107,7 +91,6 @@ async function mention (event, client) {
 	const regexpDel = /^delete |^del |^d /i;
 	const regexpAdd = /^add /i;
 	
-	
 	const del = messageText.split(regexpDel);
 	console.log('DEL', del);
 	if (del[0] == "") {
@@ -131,26 +114,22 @@ else {
 	const regexpPicLink = / pic.twittter.com\/[\n\S]+/ 
 		T.get('statuses/show', {id:replyTweet}, function(err, data, response) {
 		if (data){
-		console.log(data);
-		if (data.text.match(regexpLink)) {
-			const addStr = data.text.split(regexpLink)[0];
-			console.log(addStr);
-			addMovieReply(addStr, senderScreenName, client, replyId);		
-		}
-		else {
-			const addStr = data.text.split(regexpPicLink)[0]
-			console.log(addStr);
-			addMovieReply(addStr, senderScreenName, client, replyId);
-		}
-		
-		
+			console.log(data);
+			if (data.text.match(regexpLink)) {
+				const addStr = data.text.split(regexpLink)[0];
+				console.log(addStr);
+				addMovieReply(addStr, senderScreenName, client, replyId);		
+			}
+			else {
+				const addStr = data.text.split(regexpPicLink)[0]
+				console.log(addStr);
+				addMovieReply(addStr, senderScreenName, client, replyId);
+			}
 		}
 		else if (err) {
 			console.error(err);
 		}
-		
-	});
-	
+	});	
 }
 }
 
@@ -589,49 +568,3 @@ async function addMovie (addStr, senderScreenName, client, message, replyId) {
 
 
 connectDb().catch(console.error);
-
-
-/*(async () => {
-  const webhook = new Autohook({
-	token: config.access_token ,
-	token_secret: config.access_token_secret,
-	consumer_key: config.consumer_key,
-	consumer_secret: config.consumer_secret,
-	env: 'prod',
-	port: 1337
-  });
-  
-  // Removes existing webhooks
-  await webhook.removeWebhooks();
-  
-  // Listens to incoming activity
-  webhook.on('event',  event => {
-	  if (event.user_has_blocked == false) {
-		 // T.post('statuses/update', { status: '@'+ event.tweet_create_events[0].user. screen_name + ' Hi! My name is twitter bot :)'  }, function(err, data, response) {
-		//console.log(data)
-	  //})
-	  //console.log(event.tweet_create_events[0].in_reply_to_status_id_str);
-		T.get('statuses/show', {id:event.tweet_create_events[0].in_reply_to_status_id_str}, function(err, data, response) {
-		
-		console.log('Pic\n', data.extended_entities.media[0]);
-		console.log('Pic\n', data.extended_entities.media[1]);
-		console.log('Pic\n',data.extended_entities.media[2]);
-		console.log('Pic\n',data.extended_entities.media[3]);
-		});
-		
-		
-	 }		  
-
-  });
-  
-  
-  // Starts a server and adds a new webhook
-  await webhook.start();
-  
-  // Subscribes to a user's activity
-  await webhook.subscribe({oauth_token: config.access_token, oauth_token_secret: config.access_token_secret});
-})();
-*/
-
-
-
